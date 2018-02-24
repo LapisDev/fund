@@ -1,0 +1,85 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%  !important;
+}
+
+.content {
+	position: absolute;
+	top: 48px;
+	bottom: 0;
+  left: 0;
+  right: 0;
+	overflow: auto;
+}
+
+.titlebar, .electron-drag {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
+
+a, button, .electron-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+::-webkit-scrollbar {     
+  background-color: rgb(241, 241, 241);
+  width: .5em;
+}
+
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb {
+  background:  rgb(168, 168, 168);
+}
+
+.background {
+  position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+  background-color: rgb(63, 81, 181);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+  animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes sk-rotateplane {
+  0% { 
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+  } 50% { 
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+  } 100% { 
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}

@@ -1,0 +1,16 @@
+<div>
+  <v-chart [forceFit]="forceFit" [height]="height" [data]="dataView" [scale]="scale">
+    <v-tooltip></v-tooltip>
+    <v-axis></v-axis>
+    <v-legend></v-legend>
+    <v-line position="date*value" color="name"></v-line>
+  </v-chart>
+  <div *ngIf="showTimeButtons">
+      <button mat-button (click)="selectTime(30)">近30日</button>
+      <button mat-button (click)="selectTime(60)">近60日</button>
+      <button mat-button (click)="selectTime(90)">近90日</button>
+      <button mat-button (click)="selectTime(180)">近180日</button>
+      <button mat-button (click)="selectTime(360)">近360日</button>
+      <button mat-button (click)="selectTime(null)">全部</button>
+  </div>  
+</div>

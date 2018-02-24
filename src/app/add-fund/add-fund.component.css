@@ -1,0 +1,12 @@
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.list-header {
+  min-height: 64px;  
+}
+  
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}

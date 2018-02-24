@@ -1,0 +1,44 @@
+<mat-toolbar color="primary" class="titlebar fixed-header">
+  <img src="assets/icon.png" height="36" width="36">
+  <span>基金助手</span>
+
+  <span class="fill-remaining-space"></span>
+  <minimize-button></minimize-button>
+  <close-button></close-button>
+</mat-toolbar>
+
+<div class="content">
+  <mat-card>
+    <mat-nav-list role="list">
+      <a mat-list-item role="listitem" *ngFor="let fund of fundSummaryList" routerLink="/detail/{{fund.code}}">
+        <span matLine class="mat-subheading-1">{{fund?.name}}</span>
+        <span matLine class="mat-caption">{{fund?.code}} {{fund?.type}}</span>
+
+        <div *ngIf="fund?.imputedPrice && fund?.imputedIncrease">
+          <span class="mat-subheading-2">
+            {{fund?.imputedPrice}}
+          </span>
+          <span class="mat-body" [class.increase]="fund?.imputedIncrease >= 0" [class.decrease]="fund?.imputedIncrease < 0">
+            {{fund?.imputedIncrease > 0 ? '+' : ''}}{{fund?.imputedIncrease | number:'1.2-2'}}%
+          </span>
+        </div>
+
+        <div *ngIf="fund?.price && fund?.increase">
+          <span class="mat-subheading-2">
+            {{fund?.price}}</span>
+          <span matLine>
+            <span class="mat-body" [class.increase]="fund?.increase >= 0" [class.decrease]="fund?.increase < 0">
+              {{fund?.increase > 0 ? '+' : ''}}{{fund?.increase | number:'1.2-2'}}%
+            </span>
+            <span class="mat-caption">{{fund?.date | date:'MM-dd'}}</span>
+          </span>
+        </div>
+      </a>
+      <a mat-list-item role="listitem" routerLink="/add">
+        <span matLine class="mat-subheading-1">
+          <i class="fa fa-plus" aria-hidden="true"></i> 添加基金</span>
+      </a>
+    </mat-nav-list>
+  </mat-card>
+
+</div>

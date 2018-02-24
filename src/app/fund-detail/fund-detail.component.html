@@ -1,0 +1,74 @@
+<mat-toolbar color="primary" class="titlebar fixed-header">
+  <back-button></back-button>
+  <div fxLayout="column">
+    <span fxFill class="mat-subheading-2">{{fundSummary?.name}}</span>
+    <span fxFill class="mat-caption">{{fundSummary?.code}}</span>
+  </div>
+
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button (click)="fundState ? removeFund() : addFund()">
+    <i class="fa" [class.fa-trash]="fundState" [class.fa-plus]="!fundState" aria-hidden="true"></i>
+  </button>
+  <minimize-button></minimize-button>
+  <close-button></close-button>
+</mat-toolbar>
+
+<div class="content">
+  <mat-card>
+    <mat-card-content>
+      <div fxLayout="row">
+        <div fxFlex="50">
+          <p class="mat-caption">净值估算</p>
+          <p>
+            <span class="mat-subheading-2">{{fundSummary?.imputedPrice || 'N/A'}}</span>
+            <span class="mat-subheading-2" [class.increase]="fundSummary?.imputedIncrease >= 0" [class.decrease]="fundSummary?.imputedIncrease < 0">
+              {{fundSummary?.imputedIncrease > 0 ? '+' : ''}}{{fundSummary?.imputedIncrease | number:'1.2-2'}}{{fundSummary?.imputedIncrease ? '%' : ''}}
+            </span>
+          </p>
+          <mat-chip-list>
+            <mat-chip [selectable]="false">
+              <span class="mat-caption">{{fundSummary?.type}}</span>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+        <div fxFlex="50" *ngIf="fundSummary?.increase">
+          <p class="mat-caption" *ngIf="fundSummary?.increase">单位净值</p>
+          <p>
+            <span class="mat-subheading-2">{{fundSummary?.price}}</span>
+            <span class="mat-subheading-2" [class.increase]="fundSummary?.increase >= 0" [class.decrease]="fundSummary?.increase < 0">
+              {{fundSummary?.increase > 0 ? '+' : ''}}{{fundSummary?.increase | number:'1.2-2'}}%
+            </span>
+          </p>
+          <p class="mat-body">{{fundSummary?.date}}</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-accordion displayMode="flat">
+    <mat-expansion-panel [expanded]="fundDetail?.accNetValue" *ngIf="fundDetail?.accNetValue">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          累计净值走势
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <fund-chart [data]="fundDetail?.accNetValue" [showTimeButtons]="true"></fund-chart>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="fundDetail?.sevenDaysYearIncome" *ngIf="fundDetail?.sevenDaysYearIncome">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          7日年化收益率
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <fund-chart [data]="fundDetail?.sevenDaysYearIncome" [showTimeButtons]="true"></fund-chart>
+    </mat-expansion-panel>
+    <mat-expansion-panel *ngIf="fundDetail?.totalGrand">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          累计收益率走势
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <fund-chart [data]="fundDetail?.totalGrand" [showTimeButtons]="false"></fund-chart>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

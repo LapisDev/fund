@@ -1,0 +1,25 @@
+<mat-toolbar color="primary" class="titlebar fixed-header">
+  <back-button></back-button>
+  <span>添加基金</span>
+
+  <span class="fill-remaining-space"></span>
+  <minimize-button></minimize-button>
+  <close-button></close-button>
+</mat-toolbar>
+
+<div class="content">
+  <mat-card>
+    <div class="list-header">
+      <mat-form-field>
+        <input matInput (keyup)="searchFundInfoList($event.target.value)" placeholder="基金代码/基金名称">
+      </mat-form-field>
+    </div>
+
+    <mat-nav-list role="list">
+      <a mat-list-item role="listitem" *ngFor="let fund of fundInfoList" (click)="addFund(fund)">
+        <span matLine class="mat-subheading-1">{{fund.name}}</span>
+        <span matLine class="mat-caption">{{fund.code}} {{fund.type}}</span>
+      </a>
+    </mat-nav-list>
+  </mat-card>
+</div>
